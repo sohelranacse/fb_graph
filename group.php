@@ -4,7 +4,6 @@ include '_include/header.php';
 include 'config.php';
 
 
-// $permissions = ['email']; // Add any additional permissions you need
 $permissions = ['user_managed_groups', 'groups_access_member_info', 'user_photos'];
 
 
@@ -29,7 +28,7 @@ if (!$accessToken) {
     $group_id = "6511110672257888";
 
     // group list
-    /*$response = $fb->get("/me/groups", $accessToken);
+    $response = $fb->get("/me/groups", $accessToken);
     $data = $response->getGraphEdge();
 
     echo '<h1>Your Groups</h1>';
@@ -37,6 +36,17 @@ if (!$accessToken) {
         echo '<p>' . $group['id'] . '</p>';
         echo '<p>' . $group['name'] . '</p>';
         if(isset($group['privacy'])) echo '<p>' . $group['privacy'] . '</p>';
+        echo '<hr>';
+    }
+
+    // group member
+    /*$response = $fb->get("/$group_id/opted_in_members", $accessToken);
+    $data = $response->getGraphEdge();
+
+    echo '<h1>Members of the Selected Group</h1>';
+    foreach ($data as $group) {
+        echo '<p>' . $group['id'] . '</p>';
+        echo '<p>' . $group['name'] . '</p>';
         echo '<hr>';
     }*/
 
@@ -72,14 +82,14 @@ if (!$accessToken) {
     
 
     // files
-    $response = $fb->get("/$group_id/files", $accessToken);
+    /*$response = $fb->get("/$group_id/files", $accessToken);
     $data = $response->getGraphEdge();
     echo '<h1>Files in the Selected Group</h1>';
     foreach ($data as $file) {
         echo '<p>' . $file->getField('name') . '</p>';
         echo '<p>' . $file->getField('id') . '</p>';
         echo '<hr>';
-    }
+    }*/
 
 
     echo '</div>';
