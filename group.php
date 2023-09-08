@@ -8,7 +8,8 @@ $permissions = ['user_managed_groups', 'groups_access_member_info', 'user_photos
 
 
 try {
-    $accessToken = $helper->getAccessToken();
+    $accessToken = "EAATYZBKJeOiwBOyojbp2tF6deApXdydL5ZB5cuwIJxMbf2jaeyRduTfoV28nmDeajn2o0FjVlcEAU0baRB6AWGlT06Ecwfd6Rj5BYEjTHhusWmPDbHMFiOywx1KwwgsrqjcbFZB6ah5OF49sm1DKNpniXL3dB2XUqjPIdilZB55LC9TFN0qVK6ymriFRCxzvC0ZAQUxth";
+    // $accessToken = $helper->getAccessToken();
 } catch (Facebook\Exceptions\FacebookResponseException $e) {
     // Handle API errors
     echo 'Graph returned an error: ' . $e->getMessage();
@@ -30,7 +31,6 @@ if (!$accessToken) {
     // group list
     $response = $fb->get("/me/groups", $accessToken);
     $data = $response->getGraphEdge();
-
     echo '<h1>Your Groups</h1>';
     foreach ($data as $group) {
         echo '<p>' . $group['id'] . '</p>';
@@ -40,7 +40,7 @@ if (!$accessToken) {
     }
 
     // group member
-    /*$response = $fb->get("/$group_id/opted_in_members", $accessToken);
+    $response = $fb->get("/$group_id/opted_in_members", $accessToken);
     $data = $response->getGraphEdge();
 
     echo '<h1>Members of the Selected Group</h1>';
@@ -48,7 +48,7 @@ if (!$accessToken) {
         echo '<p>' . $group['id'] . '</p>';
         echo '<p>' . $group['name'] . '</p>';
         echo '<hr>';
-    }*/
+    }
 
     // feed
     /*$response = $fb->get("/$group_id/feed", $accessToken);
@@ -82,10 +82,11 @@ if (!$accessToken) {
     
 
     // files
-    /*$response = $fb->get("/$group_id/files", $accessToken);
+    $response = $fb->get("/$group_id/files", $accessToken);
     $data = $response->getGraphEdge();
     echo '<h1>Files in the Selected Group</h1>';
-    foreach ($data as $file) {
+    echo '<code>Your app must be approved for the Groups API feature.</code>';
+    /*foreach ($data as $file) {
         echo '<p>' . $file->getField('name') . '</p>';
         echo '<p>' . $file->getField('id') . '</p>';
         echo '<hr>';

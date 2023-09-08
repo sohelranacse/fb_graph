@@ -7,7 +7,8 @@ include 'config.php';
 $permissions = ['email'];
 
 try {
-    $accessToken = $helper->getAccessToken();
+    $accessToken = "EAATYZBKJeOiwBOyojbp2tF6deApXdydL5ZB5cuwIJxMbf2jaeyRduTfoV28nmDeajn2o0FjVlcEAU0baRB6AWGlT06Ecwfd6Rj5BYEjTHhusWmPDbHMFiOywx1KwwgsrqjcbFZB6ah5OF49sm1DKNpniXL3dB2XUqjPIdilZB55LC9TFN0qVK6ymriFRCxzvC0ZAQUxth";
+    // $accessToken = $helper->getAccessToken();
 } catch (Facebook\Exceptions\FacebookResponseException $e) {
     // Handle API errors
     echo 'Graph returned an error: ' . $e->getMessage();
