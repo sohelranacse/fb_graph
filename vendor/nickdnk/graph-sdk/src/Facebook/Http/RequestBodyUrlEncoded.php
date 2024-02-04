@@ -21,29 +21,35 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
+namespace Facebook\Http;
 
 /**
- * @see https://github.com/sarciszewski/php-future/blob/master/src/Security.php#L37-L51
+ * Class RequestBodyUrlEncoded
+ *
+ * @package Facebook
  */
-if (!function_exists('hash_equals')) {
-    function hash_equals($knownString, $userString)
-    {
-        if (function_exists('mb_strlen')) {
-            $kLen = mb_strlen($knownString, '8bit');
-            $uLen = mb_strlen($userString, '8bit');
-        } else {
-            $kLen = strlen($knownString);
-            $uLen = strlen($userString);
-        }
-        if ($kLen !== $uLen) {
-            return false;
-        }
-        $result = 0;
-        for ($i = 0; $i < $kLen; $i++) {
-            $result |= (ord($knownString[$i]) ^ ord($userString[$i]));
-        }
+class RequestBodyUrlEncoded implements RequestBodyInterface
+{
+    /**
+     * @var array The parameters to send with this request.
+     */
+    protected $params = [];
 
-        // They are only identical strings if $result is exactly 0...
-        return 0 === $result;
+    /**
+     * Creates a new GraphUrlEncodedBody entity.
+     *
+     * @param array $params
+     */
+    public function __construct(array $params)
+    {
+        $this->params = $params;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getBody()
+    {
+        return http_build_query($this->params);
     }
 }

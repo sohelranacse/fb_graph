@@ -40,6 +40,10 @@ class FacebookUrlManipulator
      */
     public static function removeParamsFromUrl($url, array $paramsToFilter)
     {
+        if (!is_string($url)) {
+            return '';
+        }
+
         $parts = parse_url($url);
 
         $query = '';
@@ -53,7 +57,7 @@ class FacebookUrlManipulator
             }
 
             if (count($params) > 0) {
-                $query = '?' . http_build_query($params, null, '&');
+                $query = '?' . http_build_query($params);
             }
         }
 
@@ -81,7 +85,7 @@ class FacebookUrlManipulator
         }
 
         if (strpos($url, '?') === false) {
-            return $url . '?' . http_build_query($newParams, null, '&');
+            return $url . '?' . http_build_query($newParams);
         }
 
         list($path, $query) = explode('?', $url, 2);
@@ -94,7 +98,7 @@ class FacebookUrlManipulator
         // Sort for a predicable order
         ksort($newParams);
 
-        return $path . '?' . http_build_query($newParams, null, '&');
+        return $path . '?' . http_build_query($newParams);
     }
 
     /**
@@ -106,6 +110,9 @@ class FacebookUrlManipulator
      */
     public static function getParamsAsArray($url)
     {
+        if (!is_string($url)) {
+            return [];
+        }
         $query = parse_url($url, PHP_URL_QUERY);
         if (!$query) {
             return [];
